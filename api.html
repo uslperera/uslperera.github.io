@@ -1,0 +1,766 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API &mdash; SemSimilar 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SemSimilar 1.0.0 documentation" href="index.html" />
+    <link rel="prev" title="Getting Started" href="tutorial1.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="document">
+<h3>Document<a class="headerlink" href="#document" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="document.Document">
+<em class="property">class </em><code class="descclassname">document.</code><code class="descname">Document</code><span class="sig-paren">(</span><em>id</em>, <em>title</em>, <em>description</em>, <em>tags</em><span class="sig-paren">)</span><a class="headerlink" href="#document.Document" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document class includes the basic skeleton to keep all the data associated with posts or articles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; unique number of the document</li>
+<li><strong>title</strong> (<em>string</em>) &#8211; title of the document</li>
+<li><strong>description</strong> (<em>string</em>) &#8211; description of the document</li>
+<li><strong>tags</strong> (<em>string</em>) &#8211; tags of the document</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Document model</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">semsimilar.core.model.document.Document</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt><strong>Property</strong>:</dt>
+<dd><ul class="first last simple">
+<li>id</li>
+<li>title</li>
+<li>description</li>
+<li>tags</li>
+<li>synset_tokens (Get synsets of the tokens excluding Description)</li>
+<li>stemmed_tokens</li>
+<li>tokens</li>
+<li>synsets (Get synsets of the tokens including Description)</li>
+</ul>
+</dd>
+<dt><strong>Setter</strong></dt>
+<dd><ul class="first last simple">
+<li>id</li>
+<li>title</li>
+<li>description</li>
+<li>tags</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Document</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;PHP Session Security&quot;</span><span class="p">,</span> 
+<span class="go">&quot;What are some guidelines for maintaining </span>
+<span class="go">responsible session security with PHP&quot;,</span>
+<span class="go"> &quot;&lt;security&gt;&lt;php&gt;&quot;)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="document.Document.generate_tokens">
+<code class="descname">generate_tokens</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#document.Document.generate_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tokenize the document based on selected components (title | description | tags)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function is automatically called during a document creation. Can be called if content of the document is changed.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">void</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;PHP Session Security&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span><span class="o">.</span><span class="n">generate_tokens</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="document.Document.set_tokenizer">
+<em class="property">static </em><code class="descname">set_tokenizer</code><span class="sig-paren">(</span><em>tokenizer</em><span class="sig-paren">)</span><a class="headerlink" href="#document.Document.set_tokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a tokenizer to extract words</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Possible tokenizers are semsimilar.core.textprocessor.tokenize.CodeTokenizer, nltk.tokenize.api.*</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tokenizer</strong> (<em>semsimilar.core.textprocessor.tokenize.CodeTokenizer, nltk.tokenize.api.*, ...</em>) &#8211; tokenizer object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">void</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Document</span><span class="o">.</span><span class="n">set_tokenizer</span><span class="p">(</span><span class="n">CodeTokenizer</span><span class="p">())</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="document.Document.set_window">
+<em class="property">static </em><code class="descname">set_window</code><span class="sig-paren">(</span><em>window</em><span class="sig-paren">)</span><a class="headerlink" href="#document.Document.set_window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the size of the window to be used for word sense disambiguation</p>
+<p>The value must be an even number greater than 1</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>window</strong> (<em>int</em>) &#8211; size of the window</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">void</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Document</span><span class="o">.</span><span class="n">set_window</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-document_worker">
+<span id="documentworker"></span><h3>DocumentWorker<a class="headerlink" href="#module-document_worker" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="document_worker.parallel_process">
+<code class="descclassname">document_worker.</code><code class="descname">parallel_process</code><span class="sig-paren">(</span><em>posts</em>, <em>processors</em><span class="sig-paren">)</span><a class="headerlink" href="#document_worker.parallel_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process large set of documents using parallel processing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>posts</strong> (<em>list&lt;key-value object&gt;</em>) &#8211; posts, articles</li>
+<li><strong>processors</strong> (<em>int</em>) &#8211; number of processors</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Processed documents</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list&lt;semsimilar.core.model.document.Document&gt;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Keys can be initialized before calling this function. (ID_KEY, TITLE_KEY, DESCRIPTION_KEY, TAGS_KEY)</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;articles.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">articles_file</span><span class="p">:</span>
+<span class="go">        articles = json.loads(articles_file.read())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parallel_process</span><span class="p">(</span><span class="n">articles</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="text-processors">
+<h2>Text Processors<a class="headerlink" href="#text-processors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="codetokenizer">
+<h3>CodeTokenizer<a class="headerlink" href="#codetokenizer" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="tokenize.CodeTokenizer">
+<em class="property">class </em><code class="descclassname">tokenize.</code><code class="descname">CodeTokenizer</code><a class="headerlink" href="#tokenize.CodeTokenizer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="tokenize.CodeTokenizer.tokenize">
+<code class="descname">tokenize</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#tokenize.CodeTokenizer.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tokenize a string (Splits the text into words)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> &#8211; stream of text</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of words</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list&lt;string&gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">CodeTokenizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="s2">&quot;Stream of text 123&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-processor">
+<span id="other"></span><h3>Other<a class="headerlink" href="#module-processor" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="processor.remove_custom_words">
+<code class="descclassname">processor.</code><code class="descname">remove_custom_words</code><span class="sig-paren">(</span><em>custom_words</em>, <em>tokens</em><span class="sig-paren">)</span><a class="headerlink" href="#processor.remove_custom_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove custom list of words</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>custom_words</strong> (<em>list&lt;string&gt;</em>) &#8211; list of words to be removed</li>
+<li><strong>tokens</strong> (<em>list&lt;string&gt;</em>) &#8211; list of words</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of words</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list&lt;string&gt;</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;this&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;demo&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_custom_words</span><span class="p">([</span><span class="s1">&#39;is&#39;</span><span class="p">],</span> <span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="processor.remove_stopwords">
+<code class="descclassname">processor.</code><code class="descname">remove_stopwords</code><span class="sig-paren">(</span><em>tokens</em><span class="sig-paren">)</span><a class="headerlink" href="#processor.remove_stopwords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove stop words in English</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tokens</strong> (<em>list&lt;string&gt;</em>) &#8211; list of words</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of words</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list&lt;string&gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;this&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;demo&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_stopwords</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="processor.stem_tokens">
+<code class="descclassname">processor.</code><code class="descname">stem_tokens</code><span class="sig-paren">(</span><em>tokens</em><span class="sig-paren">)</span><a class="headerlink" href="#processor.stem_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the stem of tokens</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tokens</strong> (<em>list&lt;string&gt;</em>) &#8211; list of words</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of words</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list&lt;string&gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;this&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;demo&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stem_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<span class="target" id="module-wsd"></span><dl class="function">
+<dt id="wsd.get_synsets">
+<code class="descclassname">wsd.</code><code class="descname">get_synsets</code><span class="sig-paren">(</span><em>tokens</em>, <em>window</em><span class="sig-paren">)</span><a class="headerlink" href="#wsd.get_synsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get synsets for the tokens passed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tokens</strong> (<em>list&lt;string&gt;</em>) &#8211; list of words</li>
+<li><strong>window</strong> (<em>int</em>) &#8211; size of the window</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of synsets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list&lt;string&gt;</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;this&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;demo&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_synsets</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-lesk">
+<span id="semantic-similarity"></span><h2>Semantic Similarity<a class="headerlink" href="#module-lesk" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lesk.similarity">
+<code class="descclassname">lesk.</code><code class="descname">similarity</code><span class="sig-paren">(</span><em>documents</em>, <em>new_document</em>, <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#lesk.similarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get most similar documents using lexical and string based calculations</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>documents</strong> (<em>list&lt;semsimilar.core.model.document.Document&gt;</em>) &#8211; documents list</li>
+<li><strong>new_document</strong> (<em>semsimilar.core.model.document.Document</em>) &#8211; document to search</li>
+<li><strong>count</strong> (<em>int</em>) &#8211; number of results wanted</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Top matched documents with their scores (0-1)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list&lt;(semsimilar.core.model.document.Document, float)&gt;</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;PHP Session Security&quot;</span><span class="p">,</span>
+<span class="go">    &quot;What are some guidelines for maintaining</span>
+<span class="go">    responsible session security with PHP&quot;,</span>
+<span class="go">    &quot;&lt;security&gt;&lt;php&gt;&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">similarity</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[(document, 0.708)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="hal.HAL">
+<em class="property">class </em><code class="descclassname">hal.</code><code class="descname">HAL</code><span class="sig-paren">(</span><em>documents</em><span class="sig-paren">)</span><a class="headerlink" href="#hal.HAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hyperspace Analogue to Language</p>
+<p>Can be used to find similar documents using keywords and word co-occurrences.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>documents</strong> (<em>list&lt;semsimilar.core.model.document.Document&gt;</em>) &#8211; documents list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">HAL model</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">semsimilar.core.similar.corpus.hal.HAL</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt><strong>Property</strong>:</dt>
+<dd><ul class="first last simple">
+<li>co_occurrence_matrix</li>
+<li>document_term_matrix</li>
+<li>threshold</li>
+<li>vocabulary</li>
+</ul>
+</dd>
+<dt><strong>Setter</strong></dt>
+<dd><ul class="first last simple">
+<li>threshold</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;first document&quot;</span><span class="p">,</span> <span class="s2">&quot;second document&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span> <span class="o">=</span> <span class="n">HAL</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span>
+<span class="go">[(document, 0.708)]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="hal.HAL.co_occurrence_search">
+<code class="descname">co_occurrence_search</code><span class="sig-paren">(</span><em>query</em>, <em>qtm</em><span class="sig-paren">)</span><a class="headerlink" href="#hal.HAL.co_occurrence_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for a document using co-occurrence of words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>query</strong> (<em>list&lt;string&gt;</em>) &#8211; list of text</li>
+<li><strong>qtm</strong> (<em>numpy.ndarray</em>) &#8211; query in vector space</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of document ids and scores</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list&lt;(int, float)&gt;</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;first document&quot;</span><span class="p">,</span> <span class="s2">&quot;second document&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span> <span class="o">=</span> <span class="n">HAL</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;new document&quot;</span><span class="p">,</span> 
+<span class="go">    None, None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qtm</span> <span class="o">=</span> <span class="n">hal</span><span class="o">.</span><span class="n">convert_to_vector_space</span><span class="p">(</span><span class="n">new_document</span><span class="o">.</span><span class="n">stemmed_tokens</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span><span class="o">.</span><span class="n">co_occurrence_search</span><span class="p">(</span><span class="n">new_document</span><span class="o">.</span><span class="n">stemmed_tokens</span><span class="p">,</span> <span class="n">qtm</span><span class="p">)</span>
+<span class="go">[(1, 0.708)]</span>
+<span class="go">_</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="hal.HAL.convert_to_vector_space">
+<code class="descname">convert_to_vector_space</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#hal.HAL.convert_to_vector_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert text into vector space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> (<em>list&lt;string&gt;</em>) &#8211; list of text</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a matrix</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.ndarray</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;first document&quot;</span><span class="p">,</span> <span class="s2">&quot;second document&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span> <span class="o">=</span> <span class="n">HAL</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;new document&quot;</span><span class="p">,</span> 
+<span class="go">    None, None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qtm</span> <span class="o">=</span> <span class="n">hal</span><span class="o">.</span><span class="n">convert_to_vector_space</span><span class="p">(</span><span class="n">new_document</span><span class="o">.</span><span class="n">stemmed_tokens</span><span class="p">)</span>
+<span class="go">[[0 1 0 1 1]]</span>
+<span class="go">_</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="hal.HAL.create_co_occurrence_matrix">
+<code class="descname">create_co_occurrence_matrix</code><span class="sig-paren">(</span><em>documents</em><span class="sig-paren">)</span><a class="headerlink" href="#hal.HAL.create_co_occurrence_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create term co-occurrence matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>documents</strong> (<em>list&lt;semsimilar.core.model.document.Document&gt;</em>) &#8211; documents list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">void</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;first document&quot;</span><span class="p">,</span> <span class="s2">&quot;second document&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span><span class="o">.</span><span class="n">create_co_occurrence_matrix</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="hal.HAL.create_document_term_matrix">
+<code class="descname">create_document_term_matrix</code><span class="sig-paren">(</span><em>documents</em><span class="sig-paren">)</span><a class="headerlink" href="#hal.HAL.create_document_term_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create document term matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>documents</strong> (<em>list&lt;semsimilar.core.model.document.Document&gt;</em>) &#8211; documents list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">void</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;first document&quot;</span><span class="p">,</span> <span class="s2">&quot;second document&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span><span class="o">.</span><span class="n">create_document_term_matrix</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="hal.HAL.get_term_id">
+<code class="descname">get_term_id</code><span class="sig-paren">(</span><em>term</em><span class="sig-paren">)</span><a class="headerlink" href="#hal.HAL.get_term_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get id of the term in vocabulary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>term</strong> (<em>string</em>) &#8211; word</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">index of the term in array</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span><span class="o">.</span><span class="n">get_term_id</span><span class="p">(</span><span class="s1">&#39;apple&#39;</span><span class="p">)</span>
+<span class="go">21</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="hal.HAL.keyword_search">
+<code class="descname">keyword_search</code><span class="sig-paren">(</span><em>query</em>, <em>qtm</em><span class="sig-paren">)</span><a class="headerlink" href="#hal.HAL.keyword_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for a document using keywords.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>query</strong> (<em>list&lt;string&gt;</em>) &#8211; list of text</li>
+<li><strong>qtm</strong> (<em>numpy.ndarray</em>) &#8211; query in vector space</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of document ids and scores</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list&lt;(int, float)&gt;</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;first document&quot;</span><span class="p">,</span> <span class="s2">&quot;second document&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span> <span class="o">=</span> <span class="n">HAL</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;new document&quot;</span><span class="p">,</span> 
+<span class="go">    None, None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qtm</span> <span class="o">=</span> <span class="n">hal</span><span class="o">.</span><span class="n">convert_to_vector_space</span><span class="p">(</span><span class="n">new_document</span><span class="o">.</span><span class="n">stemmed_tokens</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span><span class="o">.</span><span class="n">keyword_search</span><span class="p">(</span><span class="n">new_document</span><span class="o">.</span><span class="n">stemmed_tokens</span><span class="p">,</span> <span class="n">qtm</span><span class="p">)</span>
+<span class="go">[(1, 0.708)]</span>
+<span class="go">_</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="hal.HAL.semantic_search">
+<code class="descname">semantic_search</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#hal.HAL.semantic_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for a document semantically.</p>
+<p>Uses both co-occurrence and keyword search functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> (<em>list&lt;string&gt;</em>) &#8211; list of text</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of document ids and scores</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list&lt;(int, float)&gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;first document&quot;</span><span class="p">,</span> <span class="s2">&quot;second document&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span> <span class="o">=</span> <span class="n">HAL</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_document</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;new document&quot;</span><span class="p">,</span> 
+<span class="go">    None, None)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qtm</span> <span class="o">=</span> <span class="n">hal</span><span class="o">.</span><span class="n">convert_to_vector_space</span><span class="p">(</span><span class="n">new_document</span><span class="o">.</span><span class="n">stemmed_tokens</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hal</span><span class="o">.</span><span class="n">semantic_search</span><span class="p">(</span><span class="n">new_document</span><span class="o">.</span><span class="n">stemmed_tokens</span><span class="p">,</span> <span class="n">qtm</span><span class="p">)</span>
+<span class="go">[(1, 0.708)]</span>
+<span class="go">_</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-main"></span><dl class="function">
+<dt id="main.ss_similarity">
+<code class="descclassname">main.</code><code class="descname">ss_similarity</code><span class="sig-paren">(</span><em>documents</em>, <em>new_document</em>, <em>hal_model</em>, <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#main.ss_similarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find documents using SemSimilar similarity.</p>
+<p>Both HAL and Lesk based similarity calculations are used to find the most related documents.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>documents</strong> (<em>list&lt;semsimilar.core.model.document.Document&gt;</em>) &#8211; documents list</li>
+<li><strong>new_document</strong> (<em>semsimilar.core.model.document.Document</em>) &#8211; document to search</li>
+<li><strong>hal_model</strong> (<em>semsimilar.core.similarity.corpus.hal.Hal</em>) &#8211; HAL model created from existing documents</li>
+<li><strong>count</strong> (<em>int</em>) &#8211; number of results wanted</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Top matched documents with their scores (0-1)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list&lt;(semsimilar.core.model.document.Document, float)&gt;</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;PHP Session Security&quot;</span><span class="p">,</span> 
+<span class="go">    &quot;What are some guidelines for maintaining </span>
+<span class="go">    responsible session security with PHP&quot;, </span>
+<span class="go">    &quot;&lt;security&gt;&lt;php&gt;&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ss_similarity</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">hal</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[(document, 0.708)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API</a><ul>
+<li><a class="reference internal" href="#models">Models</a><ul>
+<li><a class="reference internal" href="#document">Document</a></li>
+<li><a class="reference internal" href="#module-document_worker">DocumentWorker</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#text-processors">Text Processors</a><ul>
+<li><a class="reference internal" href="#codetokenizer">CodeTokenizer</a></li>
+<li><a class="reference internal" href="#module-processor">Other</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-lesk">Semantic Similarity</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="tutorial1.html" title="previous chapter">Getting Started</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Shamal Perera.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/api.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
