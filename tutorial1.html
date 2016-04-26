@@ -42,10 +42,10 @@
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial will give you an idea on how to get semantically similar results using SemSimilar search.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">semsimilar.core.model</span> <span class="kn">import</span> <span class="n">Document</span>
-<span class="kn">from</span> <span class="nn">semsimilar.core.similarity.main</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">semsimilar.core.textprocessor.tokenize</span> <span class="kn">import</span> <span class="n">CodeTokenizer</span>
-<span class="kn">from</span> <span class="nn">semsimilar.core.similarity.corpus.hal</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">semsimilar.model</span> <span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">semsimilar.similarity_core.main</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">semsimilar.textprocessor.tokenize</span> <span class="kn">import</span> <span class="n">CodeTokenizer</span>
+<span class="kn">from</span> <span class="nn">semsimilar.similarity_core.corpus.hal</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># Set tokenizer</span>
 <span class="n">Document</span><span class="o">.</span><span class="n">set_tokenizer</span><span class="p">(</span><span class="n">CodeTokenizer</span><span class="p">())</span>
